@@ -8,7 +8,7 @@
       <div class="address-trip">
         <div class="box-search clearfix">
           <button class="search-btn"><i class="fashion-20"></i></button>
-          <input type="text" placeholder="" @keyup="searchItems(searchString)" v-model="searchString">
+          <input type="text" placeholder="" v-model="searchString">
           <a href="#" class="clear-search">
             <i></i>
             <i></i>
@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       title: this.$ml.get('select_city'),
-      searchString: null,
+      searchString: '',
       coma: this.com
     }
   },
@@ -52,11 +52,18 @@ export default {
       type: Boolean
     }
   },
+  watch: {
+    searchString: function () {
+      console.log('Search')
+      this.searchItems()
+    }
+  },
   methods: {
     closeAddress: function () {
       this.$emit('closeAddress')
     },
     searchItems: function () {
+      alert(this.searchString)
       this.$emit('searchItems', {q: this.searchString})
     },
     saveAddress: function (id, name) {
